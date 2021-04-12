@@ -15,6 +15,7 @@
 
 void list_armour();
 void list_jewellery();
+void list_monsters();
 
 void show_specific_help(const string& key);
 void show_levelmap_help();

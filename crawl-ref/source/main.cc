@@ -783,6 +783,7 @@ static bool _cmd_is_repeatable(command_type cmd, bool is_again = false)
     case CMD_LIST_ARMOUR:
     case CMD_LIST_JEWELLERY:
     case CMD_LIST_GOLD:
+    case CMD_LIST_MONSTERS:
     case CMD_CHARACTER_DUMP:
     case CMD_DISPLAY_COMMANDS:
     case CMD_DISPLAY_INVENTORY:
@@ -2056,6 +2057,7 @@ void process_command(command_type cmd, command_type prev_cmd)
     case CMD_LIST_ARMOUR:              list_armour();                  break;
     case CMD_LIST_GOLD:                _do_list_gold();                break;
     case CMD_LIST_JEWELLERY:           list_jewellery();               break;
+    case CMD_LIST_MONSTERS:            list_monsters();                break;
     case CMD_MAKE_NOTE:                make_user_note();               break;
     case CMD_REPLAY_MESSAGES:
         replay_messages();
