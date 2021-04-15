@@ -360,7 +360,6 @@ void list_monsters()
 {
     // Grab the player's position.
     coord_def pos = you.pos();
-    mprf("Player x is %d, Player y is %d", pos.x, pos.y);
     // Check the 8 tiles around the player for monsters. Starting above.
     if (monster_at(pos + coord_def(0,-1))) {
         mprf("Above: .");
