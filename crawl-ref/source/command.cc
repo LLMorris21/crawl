@@ -358,6 +358,122 @@ void list_jewellery()
 
 void list_monsters()
 {
+    // Grab the player's position.
+    coord_def pos = you.pos();
+    mprf("Player x is %d, Player y is %d", pos.x, pos.y);
+    // Check the 8 tiles around the player for monsters. Starting above.
+    if (monster_at(pos + coord_def(0,-1))) {
+        mprf("Above: .");
+    }
+    if (monster_at(pos + coord_def(1,-1))) {
+        mprf("Above Right: .");
+    }
+    if (monster_at(pos + coord_def(1,0))) {
+        mprf("Right: .");
+    }
+    if (monster_at(pos + coord_def(1,1))) {
+        mprf("Below Right: .");
+    }
+    if (monster_at(pos + coord_def(0,1))) {
+        mprf("Below: .");
+    }
+    if (monster_at(pos + coord_def(-1,1))) {
+        mprf("Below Left: .");
+    }
+    if (monster_at(pos + coord_def(-1,0))) {
+        mprf("Left: .");
+    }
+    if (monster_at(pos + coord_def(-1,-1))) {
+        mprf("Above Left: .");
+    }
+    
+
+
+/*
+    vector<string> mons;
+    int nfound = 0;
+
+    int mon_nums[MAX_MONSTERS];
+
+    for (int i = 0; i < MAX_MONSTERS; ++i)
+        mon_nums[i] = i;
+
+//    sort(mon_nums, mon_nums + MAX_MONSTERS, _sort_monster_list);
+
+    int total_exp = 0, total_adj_exp = 0, total_nonuniq_exp = 0;
+
+    string prev_name = "";
+    int    count     = 0;
+
+    for (int i = 0; i < MAX_MONSTERS; ++i)
+    {
+        const int idx = mon_nums[i];
+        if (invalid_monster_index(idx))
+            continue;
+
+        const monster* mi(&env.mons[idx]);
+        if (!mi->alive())
+            continue;
+
+        string name = mi->name(DESC_PLAIN, true);
+
+        if (prev_name != name && count > 0)
+        {
+            char buf[80];
+            if (count > 1)
+            {
+//                snprintf(buf, sizeof(buf), "%d %s", count,
+//                         pluralise_monster(prev_name).c_str());
+            }
+            else
+                snprintf(buf, sizeof(buf), "%s", prev_name.c_str());
+            mons.push_back(buf);
+
+            count = 0;
+        }
+        nfound++;
+        count++;
+        prev_name = name;
+
+        int exp = exper_value(*mi);
+        total_exp += exp;
+        if (!mons_is_unique(mi->type))
+            total_nonuniq_exp += exp;
+
+        if ((mi->flags & (MF_WAS_NEUTRAL | MF_NO_REWARD))
+            || mi->has_ench(ENCH_ABJ))
+        {
+            continue;
+        }
+        if (mi->flags & MF_PACIFIED)
+            exp /= 2;
+
+        total_adj_exp += exp;
+    }
+
+    char buf[80];
+    if (count > 1)
+    {
+//        snprintf(buf, sizeof(buf), "%d %s", count,
+//                 pluralise_monster(prev_name).c_str());
+    }
+    else
+        snprintf(buf, sizeof(buf), "%s", prev_name.c_str());
+    mons.emplace_back(buf);
+
+    mpr_comma_separated_list("Monsters: ", mons);
+
+    if (total_adj_exp == total_exp)
+    {
+        mprf("%d monsters, %d total exp value (%d non-uniq)",
+             nfound, total_exp, total_nonuniq_exp);
+    }
+    else
+    {
+        mprf("%d monsters, %d total exp value (%d non-uniq, %d adjusted)",
+             nfound, total_exp, total_nonuniq_exp, total_adj_exp);
+    }
+*/
 }
 
 static const char *targeting_help_1 =
