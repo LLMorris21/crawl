@@ -379,11 +379,15 @@ void list_monsters()
 	{coord_def(0,1), "Below"}, {coord_def(-1,1), "Below Left"},
 	{coord_def(-1,0), "Left"}, {coord_def(-1,-1), "Above Left"}
     };
+    bool monster_adjacent = false;
     for (const auto &p : adjacent_tiles) {
 	auto offset = p.first;
 	auto tile_name = p.second;
-        print_monster_if_alive(pos, offset, tile_name);
+	if (print_monster_if_alive(pos, offset, tile_name))
+	    monster_adjacent = true;
     }
+    if (!monster_adjacent)
+	mprf("No adjacent monsters.");
 } // list_monsters
 
 static const char *targeting_help_1 =
