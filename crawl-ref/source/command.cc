@@ -362,28 +362,28 @@ void list_monsters()
     coord_def pos = you.pos();
     // Check the 8 tiles around the player for monsters. Starting above.
     if (monster_at(pos + coord_def(0,-1))) {
-        mprf("Above: .");
+        mprf("Above: %s.", monster_at(pos + coord_def(0,-1))->full_name(DESC_PLAIN).c_str());
     }
     if (monster_at(pos + coord_def(1,-1))) {
-        mprf("Above Right: .");
+        mprf("Above Right: %s.", monster_at(pos + coord_def(1,-1))->full_name(DESC_PLAIN).c_str());
     }
     if (monster_at(pos + coord_def(1,0))) {
-        mprf("Right: .");
+        mprf("Right: %s.", monster_at(pos + coord_def(1,0))->full_name(DESC_PLAIN).c_str());
     }
     if (monster_at(pos + coord_def(1,1))) {
-        mprf("Below Right: .");
+        mprf("Below Right: %s.", monster_at(pos + coord_def(1,1))->full_name(DESC_PLAIN).c_str());
     }
     if (monster_at(pos + coord_def(0,1))) {
-        mprf("Below: .");
+        mprf("Below: %s.", monster_at(pos + coord_def(0,1))->full_name(DESC_PLAIN).c_str());
     }
     if (monster_at(pos + coord_def(-1,1))) {
-        mprf("Below Left: .");
+        mprf("Below Left: %s.", monster_at(pos + coord_def(-1,1))->full_name(DESC_PLAIN).c_str());
     }
     if (monster_at(pos + coord_def(-1,0))) {
-        mprf("Left: .");
+        mprf("Left: %s.", monster_at(pos + coord_def(-1,0))->full_name(DESC_PLAIN).c_str());
     }
     if (monster_at(pos + coord_def(-1,-1))) {
-        mprf("Above Left: .");
+        mprf("Above Left: %s.", monster_at(pos + coord_def(-1,-1))->full_name(DESC_PLAIN).c_str());
     }
     
 
