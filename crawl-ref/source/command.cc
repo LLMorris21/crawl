@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <cstring>
 #include <sstream>
+#include <utility>
 
 #include "chardump.h"
 #include "database.h"
@@ -356,42 +357,32 @@ void list_jewellery()
     }
 }
 
+bool print_monster_if_alive(coord_def player_pos, coord_def offset, string tile_name) {
+    if (monster_at(player_pos + offset)) {
+	if (monster_at(player_pos + offset)->alive()) {
+            mprf("%s: %s.", tile_name.c_str(),
+			    monster_at(player_pos + offset)->full_name(DESC_PLAIN).c_str());
+	    return true;
+	}
+    }
+    return false;
+} // print_monster_if_alive
+
 void list_monsters()
 {
     // Grab the player's position.
     coord_def pos = you.pos();
     // Check the 8 tiles around the player for monsters. Starting above.
-    if (monster_at(pos + coord_def(0,-1))) {
-	if (monster_at(pos + coord_def(0,-1))->alive())
-            mprf("Above: %s.", monster_at(pos + coord_def(0,-1))->full_name(DESC_PLAIN).c_str());
-    }
-    if (monster_at(pos + coord_def(1,-1))) {
-	if (monster_at(pos + coord_def(1,-1))->alive())
-            mprf("Above Right: %s.", monster_at(pos + coord_def(1,-1))->full_name(DESC_PLAIN).c_str());
-    }
-    if (monster_at(pos + coord_def(1,0))) {
-	if (monster_at(pos + coord_def(1,0))->alive())
-            mprf("Right: %s.", monster_at(pos + coord_def(1,0))->full_name(DESC_PLAIN).c_str());
-    }
-    if (monster_at(pos + coord_def(1,1))) {
-	if (monster_at(pos + coord_def(1,1))->alive())
-            mprf("Below Right: %s.", monster_at(pos + coord_def(1,1))->full_name(DESC_PLAIN).c_str());
-    }
-    if (monster_at(pos + coord_def(0,1))) {
-	if (monster_at(pos + coord_def(0,1))->alive())
-            mprf("Below: %s.", monster_at(pos + coord_def(0,1))->full_name(DESC_PLAIN).c_str());
-    }
-    if (monster_at(pos + coord_def(-1,1))) {
-	if (monster_at(pos + coord_def(-1,1))->alive())
-            mprf("Below Left: %s.", monster_at(pos + coord_def(-1,1))->full_name(DESC_PLAIN).c_str());
-    }
-    if (monster_at(pos + coord_def(-1,0))) {
-	if (monster_at(pos + coord_def(-1,0))->alive())
-            mprf("Left: %s.", monster_at(pos + coord_def(-1,0))->full_name(DESC_PLAIN).c_str());
-    }
-    if (monster_at(pos + coord_def(-1,-1))) {
-	if (monster_at(pos + coord_def(-1,-1))->alive())
-            mprf("Above Left: %s.", monster_at(pos + coord_def(-1,-1))->full_name(DESC_PLAIN).c_str());
+    pair<coord_def, const char *> adjacent_tiles[] = {
+        {coord_def(0,-1), "Above"}, {coord_def(1,-1), "Above Right"},
+	{coord_def(1,0), "Right"}, {coord_def(1,1), "Below Right"},
+	{coord_def(0,1), "Below"}, {coord_def(-1,1), "Below Left"},
+	{coord_def(-1,0), "Left"}, {coord_def(-1,-1), "Above Left"}
+    };
+    for (const auto &p : adjacent_tiles) {
+	auto offset = p.first;
+	auto tile_name = p.second;
+        print_monster_if_alive(pos, offset, tile_name);
     }
 } // list_monsters
 
