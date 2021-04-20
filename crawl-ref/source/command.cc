@@ -905,6 +905,7 @@ static void _add_formatted_keyhelp(column_composer &cols)
     _add_command(cols, 1, CMD_FULL_VIEW, "list monsters, items, features");
     cols.add_formatted(1, "         in view\n",
                        false);
+    _add_insert_commands(cols, 1, 7, CMD_LIST_MONSTERS, "<w>%</w>heck for visible 8-adjacent monsters", { CMD_LIST_MONSTERS });
     _add_command(cols, 1, CMD_SHOW_TERRAIN, "toggle view layers");
     _add_command(cols, 1, CMD_DISPLAY_OVERMAP, "show dungeon Overview");
     _add_command(cols, 1, CMD_TOGGLE_AUTOPICKUP, "toggle auto-pickup");
