@@ -15,6 +15,8 @@
 
 void list_armour();
 void list_jewellery();
+void list_monsters();
+bool print_monster_if_alive(coord_def player_pos, coord_def offset, string tile_name);
 
 void show_specific_help(const string& key);
 void show_levelmap_help();
