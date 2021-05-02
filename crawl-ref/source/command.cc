@@ -359,9 +359,9 @@ void list_jewellery()
 
 bool print_monster_if_alive(coord_def player_pos, coord_def offset, string tile_name) {
     if (monster_at(player_pos + offset)) {
-	if (monster_at(player_pos + offset)->alive() && you.can_see(*monster_at(player_pos + offset))) {
+	if (monster_at(player_pos + offset)->alive() && env.map_knowledge(player_pos + offset).monsterinfo()) {
             mprf("%s: %s.", tile_name.c_str(),
-			    monster_at(player_pos + offset)->full_name(DESC_PLAIN).c_str());
+			    env.map_knowledge(player_pos + offset).monsterinfo()->full_name(DESC_PLAIN).c_str());
 	    return true;
 	}
     }
