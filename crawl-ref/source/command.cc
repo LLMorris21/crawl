@@ -12,7 +12,6 @@
 #include <cstdio>
 #include <cstring>
 #include <sstream>
-#include <utility>
 
 #include "chardump.h"
 #include "database.h"
@@ -356,39 +355,6 @@ void list_jewellery()
             mprf(MSGCH_EQUIPMENT, "%s%s", jstr.c_str(), item.c_str());
     }
 }
-
-bool print_monster_if_alive(coord_def player_pos, coord_def offset, string tile_name) {
-    if (monster_at(player_pos + offset)) {
-	if (monster_at(player_pos + offset)->alive() && you.can_see(*monster_at(player_pos + offset))) {
-            mprf("%s: %s.", tile_name.c_str(),
-			    monster_at(player_pos + offset)->full_name(DESC_PLAIN).c_str());
-	    return true;
-	}
-    }
-    return false;
-} // print_monster_if_alive
-
-void list_monsters()
-{
-    // Grab the player's position.
-    coord_def pos = you.pos();
-    // Check the 8 tiles around the player for monsters. Starting above.
-    pair<coord_def, const char *> adjacent_tiles[] = {
-        {coord_def(0,-1), "Above"}, {coord_def(1,-1), "Above Right"},
-	{coord_def(1,0), "Right"}, {coord_def(1,1), "Below Right"},
-	{coord_def(0,1), "Below"}, {coord_def(-1,1), "Below Left"},
-	{coord_def(-1,0), "Left"}, {coord_def(-1,-1), "Above Left"}
-    };
-    bool monster_adjacent = false;
-    for (const auto &p : adjacent_tiles) {
-	auto offset = p.first;
-	auto tile_name = p.second;
-	if (print_monster_if_alive(pos, offset, tile_name))
-	    monster_adjacent = true;
-    }
-    if (!monster_adjacent)
-	mprf("No adjacent monsters.");
-} // list_monsters
 
 static const char *targeting_help_1 =
     "<h>Examine surroundings ('<w>x</w><h>' in main):\n"
@@ -904,7 +870,6 @@ static void _add_formatted_keyhelp(column_composer &cols)
     _add_command(cols, 1, CMD_FULL_VIEW, "list monsters, items, features");
     cols.add_formatted(1, "         in view\n",
                        false);
-    _add_insert_commands(cols, 1, 7, CMD_LIST_MONSTERS, "<w>%</w>heck for visible 8-adjacent monsters", { CMD_LIST_MONSTERS });
     _add_command(cols, 1, CMD_SHOW_TERRAIN, "toggle view layers");
     _add_command(cols, 1, CMD_DISPLAY_OVERMAP, "show dungeon Overview");
     _add_command(cols, 1, CMD_TOGGLE_AUTOPICKUP, "toggle auto-pickup");
